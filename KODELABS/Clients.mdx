@@ -56,7 +56,7 @@ Before adding a building, make sure you:
 
        <Tooltip tip="">3.5. Enter the </Tooltip>**<Tooltip tip=""># of Floors </Tooltip>**<Tooltip tip="">in the building.</Tooltip> 
 
-       3.6. Select the **Country Code** from the dropdown.
+       3.6. Select the **Country Code** from the drop-down.
 
        3.7. Enter the **Phone Number**. 
 
@@ -90,4 +90,37 @@ Before adding a building, make sure you:
      You have successfully added a new building to your KODE OS portfolio. The building is now listed in Launchpad, ready for further configuration.
 </Accordion>
 
-## Managing Buildings
+## **Assign a user to a building in Cloud BMS**
+
+Each user in KODE OS must be assigned to a building to access its dashboards, automation rules, and data. Assign users to specific buildings to control who can access building data and features in Cloud BMS.\
+This task is for administrators who manage access within KODE OS.
+
+<Info>
+  Without an assigned building, a user can sign in but won’t see any building-related data in Cloud BMS.
+</Info>
+
+### Prerequisites
+
+- You must have **Admin** permissions for the client.
+- The user must already exist in **Launchpad \>\> Users**.
+- At least one **building** must be created in your client workspace
+
+<Accordion title="Assign a user ">
+   1. In **Launchpad**, select **Users** from the sidebar. 
+   2. Select a user  to assign to a building.
+   3. In  **Apps**, click **Assign App **of **KODE OS**.
+   4. From the **User Role** drop-down, select the appropriate role. For example, _Admin_, _Manager_, or _Viewer_.
+   5. Click **Assign**. The user is now assigned to KODE OS and receives an email notification.
+   6.  In **Cloud BMS**, go to **Portfolio \>\> Settings \>\> Users**.
+   7.  Select the same user to open their **User Details** page.
+   8. Click the **Buildings**. The list of assigned buildings appears.
+   9. Click **\+ Assign Buildings**.
+  10.  Select the building(s) to assign to the user.
+  11. Click **Save**.
+
+  The user now has access to the selected buildings in **Cloud BMS**, based on their assigned role in **KODE OS**.\
+  An email notification is automatically sent to confirm their new access.
+</Accordion>
+
+
+---
