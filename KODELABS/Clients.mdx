@@ -133,15 +133,11 @@ This task is for administrators who manage access within KODE OS.
 
 Use roles and permissions in Launchpad to control who can access and manage KODE OS modules and data. Administrators can view existing roles, add new ones, and assign the right permissions for each user.
 
-<Info>
-  Launchpad uses **Role-Based Access Control (RBAC)** to manage user access.\
-  Instead of assigning individual permissions to each user, permissions are grouped under _roles_, and users inherit access based on their assigned role.
-</Info>
-
-### Why user roles matter
+### Why roles matter
 
 Roles keep the workspace secure and organized. They determine who can manage buildings, dashboards, or automations, and who can simply view them.\
-Using **Role-Based Access Control (RBAC)**, permissions are granted to a role, and users inherit those permissions when the role is assigned to them. 
+Launchpad uses **Role-Based Access Control (RBAC)** to manage user access.\
+Instead of assigning individual permissions to each user, permissions are grouped under _roles_, and users inherit access based on their assigned role. 
 
 **Prerequisites**
 
@@ -190,38 +186,40 @@ Using **Role-Based Access Control (RBAC)**, permissions are granted to a role, a
 
 ### Understanding role mapping (for SSO Integration)
 
-When Single Sign-On (SSO) is enabled for your KODE OS workspace, external Identity Provider (IdP) roles can be mapped directly to KODE OS roles. This process centralizes user role management within your organization's IdP, simplifying administration.
+When **Single Sign-On (SSO)** is enabled, your organization’s **Identity Provider (IdP)** can directly map its internal roles to KODE OS roles.\
+That means:
 
-This means that while user authentication occurs in the IdP, their permissions within KODE OS are automatically passed through based on their IdP roles. This capability reinforces the concept that role assignments and modifications are managed in a single, authoritative source. 
+- Authentication happens in the IdP.
+- Role-based permissions automatically pass to KODE OS when a user logs in.
+
+This approach keeps access control consistent across systems and allows IT admins to manage roles from a single source.
 
 <Accordion title="Map user roles">
   1. In **Launchpad**, click **Sign-in Methods**.
-  2. Select the authentication method.
+  2. Select the authentication method to configure.
   3. Open the **Role Mapping** tab.
   4. Click **\+ Assign Role(s)**.
   5. Enter the following details.
 
-     **a. Role Name/IdP Role Identifier**   : Name or UID (by which it is uniquely identified in IdP) of the IdP group that you  want to map.
+        a. **Role Name / IdP Role Identifier**. The  name or UID of the IdP group.
 
-        b. KODE Labs organization **Role**:
+         b.**Launchpad Role**  (required)
 
-            Launchpad Role (required)
-
-            Choose myMSI and KODE OS roles (optional)
+         c. **myMSI** and **KODE OS** roles (optional)
   6. Click **Assign Role(s)**.
 </Accordion>
 
 ### How permissions are structured
 
-**Permissions** define _what_ a user can do within a module or submodule of KODE OS.\
-Each permission is tied to a role — roles grant users their effective access.
+**Permissions** define what a user can do within a module or submodule of KODE OS.\
+Each permission is tied to a role which grants users their effective access.
 
 **Types of permissions**
 
 - **Read Permissions**: Enables users to view information or access specific features within a module or submodule.
 - **Write Permissions**: Grants users the ability to modify, create, or delete data and configurations within a module or submodule.
 
-Permissions are grouped into **modules** (like _Buildings_, _Maintenance_, _Users_) and **submodules** (like _Users → General_ or _Buildings → Points_).\
+Permissions are grouped into **modules**, like Buildings, Maintenance, Users and **submodules**, like Users \> General.\
 This structure allows administrators to give granular, precise access.
 
 **Prerequisites**
@@ -275,3 +273,174 @@ This structure allows administrators to give granular, precise access.
   15. Click **Confirm**.
   16. Click **Save**. The changes to user management for the selected role are saved.
 </Accordion>
+
+### **Permissions**
+
+The table below lists the KODE OS modules and submodules, and describes what functions users are allowed to do for each Permission Name.
+
+| Modules    | Submodules | Permission Name    | Access Level | Description                                                                                                                                                                                                                                                                        |
+| ---------- | ---------- | ------------------ | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| BuildingBI | Dashboards | Manage Collections | WRITE        | Manage dashboard collections within BuildingBI. Includes:  Reorder all collections (regardless of access)  Create new collections  Edit existing collections  Delete collections  Publish collections  Manage viewers (adding/removing users with view-only access to collections) |
+|            |            |                    |              |                                                                                                                                                                                                                                                                                    |
+
+## Set up Authentication and Single Sign-On
+
+**Single Sign-On (SSO)** allows users to log in to KODE OS with their existing organization credentials instead of separate KODE Labs accounts.\
+Launchpad supports industry-standard protocols, **OpenID Connect (OIDC)** and **Security Assertion Markup Language (SAML)** — to connect with your identity management platform.
+
+When SSO is enabled:
+
+- Users authenticate through your organization’s **IdP** (e.g., Azure AD, Okta, CyberArk, Auth0, or JumpCloud).
+- Access to KODE OS and related apps is automatically granted once verified.
+- Administrators retain centralized control over user access and permissions.
+
+**Before you begin**
+
+To enable Single Sign-On (SSO) for your organization, ensure you have:
+
+- **Admin role** in your KODE Labs workspace.
+- Access to your **Identity Provider (IdP)** configuration settings.
+- One of the following authentication protocols is available:
+  - **SAML 2.0**
+  - **OpenID Connect (OIDC)**
+
+<Accordion title="Set up SSO in Launchpad">
+  1. In **Launchpad**, open the sidebar and click **Sign-in Methods**.\
+     The **Sign-in Methods** page displays all configured IAM methods.
+  2. Click **\+ Add Sign-in Method**.
+  3. Select an existing template or choose a **custom method (OIDC or SAML)**.
+  4. In **Sign-in Method Name**, enter a unique name for this connection.
+  5. Review the auto-generated fields — **Assertion Consumer Service URL**, **SP Entity ID**, **Protocol Binding**, and **Signature Algorithm**.
+
+     > 💡 Copy these values; you’ll need them in your IdP setup later.
+  6. Enter any additional required information based on your IdP.
+  7. Click **Save**.
+</Accordion>
+
+<Accordion title="Configure the KODE Labs app in your IdP">
+  1. Log in to your IdP account.
+  2. Create a new application or connector.
+  3. Provide the configuration details generated by Launchpad:
+     - **Single Sign-on URL:** The Assertion Consumer Service URL from Launchpad.
+     - **Entity ID:** The SP Entity ID or Audience URI.
+     - **NameID Format:** _EmailAddress_.
+     - **Signature Algorithm:** _RSA-SHA256_.
+     - **Protocol Binding:** _HTTP-POST_.
+  4. Under **Attribute Mapping**, add the following:
+     - _First name_ attribute or claim.
+     - _Last name_ attribute or claim.
+     - Optional **roles** attribute to map IdP roles to KODE OS roles.
+  5. Save your configuration.
+  6. Copy your **IdP Single Sign-On URL** and **x509Certificate** (or download the metadata file).
+</Accordion>
+
+<Accordion title="Configure IdP details in Launchpad">
+  1. Return to **Launchpad → Sign-in Methods**.
+  2. Select your new SSO configuration.
+  3. Upload your **Metadata file**, or manually enter:
+     - **IdP URL**
+     - **Certificate (x509)**
+     - **Attribute Configuration**
+  4. Click **Save**.
+</Accordion>
+
+SSO is now active. Users can log in through your organization’s IdP instead of separate KODE OS credentials.
+
+<Accordion title="Configure role mapping">
+  1. Before mapping, ensure role attributes exist in your IdP’s **Attribute Mappings**.
+  2. In **Launchpad**, go to **Sign-in Methods → Role Mapping**.
+  3. Click **\+ Assign Role(s)**.
+  4. In the dialog, enter:
+     - **IdP Role Identifier** — the name or UID of the IdP group.
+     - **Launchpad Role** — required.
+     - **myMSI / KODE OS Roles** — optional.
+  5. Click **Assign Role(s)**.
+
+  ### Notes
+
+  - Once IdP role mapping is enabled, role management for those users occurs in your IdP, not in KODE Labs.
+  - You can enable:
+    - **Create user on first login** — automatically create users on first sign-in.
+    - **Default Role** — assign a fallback role for unmapped users.
+    - **Update user role on login** — synchronize IdP role changes.
+    - **Site Mapping** — link access to specific sites after saving.
+</Accordion>
+
+<Accordion title="Edit SSO configuration">
+  1. In **Launchpad**, open **Sign-in Methods**.
+  2. Select the IAM method you want to modify.
+  3. Click **Edit** at the top-right corner of the **SSO Details** section.
+  4. UpdatLog in through Single Sign-On
+
+     Users can log in to KODE OS in two ways:Log in through Single Sign-On
+
+     Users can log in to KODE OS in two ways:Log in through Single Sign-On
+
+     Users can log in to KODE OS in two ways:Log in through Single Sign-On
+
+     Users can log in to KODE OS in two ways:Log in through Single Sign-On
+
+     Users can log in to KODE OS in two ways:Log in through Single Sign-On
+
+     Users can log in to KODE OS in two ways:Log in through Single Sign-On
+
+     Users can log in to KODE OS in two ways:Log in through Single Sign-On
+
+     Users can log in to KODE OS in two ways:e configuration fields such as **Entity ID**, **IdP URL**, or **Certificate**.
+  5. Upload new metadata if available.
+  6. Click **Save**.
+</Accordion>
+
+### Log in through Single Sign-On
+
+There are two ways to sign in to the building environment: 
+
+<Accordion title="With a workspace URL">
+  1. In a browser, enter your workspace domain (e.g., [_companyname.kodelabs.com_](http://companyname.kodelabs.com)).
+  2. On the Sign-in page, click **Sign in with [your IdP name]**.
+  3. Authenticate using your IdP credentials.
+  4. After authentication, you’re redirected back to your workspace.
+</Accordion>
+
+<Accordion title="Without a workspace URL">
+  1. Visit [**accounts.kodelabs.com**](http://accounts.kodelabs.com).
+  2. Enter your workspace domain and click **Continue**.
+  3. Select your preferred IAM method and sign in through your IdP.
+
+  > 💡 If you forget your workspace domain, click **Find your workspace** and follow the email link to retrieve it.
+</Accordion>
+
+### Add a New IAM Method
+
+You can add additional **Identity and Access Management (IAM)** sign-in methods to Launchpad.\
+This is useful when your organization manages multiple identity providers or needs to support both internal and external user directories.
+
+<Accordion title="Add a new IAM method">
+  1. In **Launchpad**, open the sidebar and click **Sign-in Methods**.\
+     The **Sign-in Methods** page lists all existing IAM methods configured for your organization.
+  2. Click **\+ Add Sign-in Method**.\
+     A pop-up window appears showing available options.
+  3. Select the **IAM method** you want to add and click **Continue**.
+  4. Complete the required configuration fields.
+  5. Click **Save**.
+
+  **Note:** Only users with **Admin** permissions can add or modify IAM methods.
+</Accordion>
+
+### Reference: Supported parameters
+
+**SAML Required Fields**
+
+| Parameter           | Type          | Description                                       |
+| :------------------ | :------------ | :------------------------------------------------ |
+| **IdP Entity ID**   | Set by client | Unique identifier of the directory.               |
+| **IdP URL**         | URL           | Authentication endpoint for SAML requests.        |
+| **x509Certificate** | .pem or .der  | Public certificate for validating SAML responses. |
+
+**OIDC Required Fields**
+
+| Parameter                 | Type          | Description                                            |
+| :------------------------ | :------------ | :----------------------------------------------------- |
+| **OpenID Well-Known URL** | URL           | Authentication endpoint for your directory instance.   |
+| **Client ID**             | Hex string    | Public identifier of your app.                         |
+| **Client Secret**         | 256-bit value | Secret used to authorize between KODE OS and your IdP. |
