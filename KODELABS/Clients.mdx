@@ -11,7 +11,7 @@ Inside each **Client**, you manage:
 
 - **Buildings**: Physical sites they monitor, like offices, campuses, and facilities.
 - **Users**: People who access those buildings.
-- **Roles and Permissions**: Define what each user can do.
+- **Roles and Permissions**: Define what each user is authorised to do.
 - **Authentication & Security (SSO)**: How users sign in securely.
 - **Trusted Organisations**: Share data or access with other clients.
 - **Service Accounts**: Automate integrations or API connections.
@@ -46,23 +46,23 @@ Before adding a building, make sure you:
   2. Click **\+ Add Building**.
   3. In **General Information**, enter the required details for your new building. Fields marked with an asterisk (\*) are mandatory.
 
-       <Tooltip tip="">3.1. Enter the </Tooltip>**<Tooltip tip="">Name</Tooltip>**<Tooltip tip=""> of the building as you want it to appear in Launchpad.</Tooltip>
+       <Tooltip tip="">3.1. Enter the </Tooltip>**Name**<Tooltip tip="">of the building as you want it to appear in Launchpad.</Tooltip> 
 
-       <Tooltip tip="">3.2. Enter the </Tooltip>**<Tooltip tip="">Year</Tooltip>**<Tooltip tip=""> the building was completed.</Tooltip>
+       <Tooltip tip="">3.2. Enter the </Tooltip>**Year**<Tooltip tip="">the building was completed.</Tooltip> 
 
-       <Tooltip tip="">3.3. Enter an </Tooltip>**<Tooltip tip="">Area</Tooltip>**<Tooltip tip=""> in </Tooltip>_<Tooltip tip="">ft²</Tooltip>_<Tooltip tip="">. Total floor area of the building.</Tooltip>
+       <Tooltip tip="">3.3. Enter an </Tooltip>**Area**<Tooltip tip="">in </Tooltip> _ft²_<Tooltip tip="">. Total floor area of the building.</Tooltip>
 
-       <Tooltip tip="">3.4. Select the </Tooltip>**<Tooltip tip="">Type </Tooltip>**<Tooltip tip="">from the dropdown. </Tooltip>
+       <Tooltip tip="">3.4. Select the </Tooltip>**Type **<Tooltip tip="">from the dropdown. </Tooltip>
 
-       <Tooltip tip="">3.5. Enter the </Tooltip>**<Tooltip tip=""># of Floors </Tooltip>**<Tooltip tip="">in the building.</Tooltip> 
+       <Tooltip tip="">3.5. Enter the </Tooltip>**# of Floors **<Tooltip tip="">in the building.</Tooltip> 
 
        3.6. Select the **Country Code** from the drop-down.
 
        3.7. Enter the **Phone Number**. 
 
-       <Tooltip tip="">3.8. Enter a </Tooltip>**<Tooltip tip="">Base Temperature</Tooltip>**<Tooltip tip="">. It is the reference temperature for energy calculations.</Tooltip>
+       <Tooltip tip="">3.8. Enter a </Tooltip>**Base Temperature**<Tooltip tip="">. It is the reference temperature for energy calculations.</Tooltip>
 
-       <Tooltip tip="">3.9. Select the temperature</Tooltip>**<Tooltip tip="">Unit.</Tooltip>** 
+       <Tooltip tip="">3.9. Select the temperature</Tooltip> **Unit.**
   4.  In **Address Information**, enter the complete address of the building. Ensure all fields are accurate, as these details affect location-based analytics.
 
        4.1. Enter an **Address**. It must be the primary address line for the building.
@@ -106,9 +106,9 @@ This task is for administrators who manage access within KODE OS.
 - At least one **building** must be created in your client workspace
 
 <Accordion title="Assign a user ">
-   1. In **Launchpad**, select **Users** from the sidebar. 
+   1. In **Launchpad**, select **Users** from the sidebar.
    2. Select a user  to assign to a building.
-   3. In  **Apps**, click **Assign App **of **KODE OS**.
+   3. In  **Apps**, click \*\*Assign App \*\*of **KODE OS**.
    4. From the **User Role** drop-down, select the appropriate role. For example, _Admin_, _Manager_, or _Viewer_.
    5. Click **Assign**. The user is now assigned to KODE OS and receives an email notification.
    6.  In **Cloud BMS**, go to **Portfolio \>\> Settings \>\> Users**.
@@ -118,9 +118,160 @@ This task is for administrators who manage access within KODE OS.
   10.  Select the building(s) to assign to the user.
   11. Click **Save**.
 
+  <img
+    src="/Selectauser"
+    alt="Selectause"
+    title="Selectause"
+    style={{ width:"82%" }}
+  />
+
   The user now has access to the selected buildings in **Cloud BMS**, based on their assigned role in **KODE OS**.\
   An email notification is automatically sent to confirm their new access.
 </Accordion>
 
+## Control access with roles and permissions
 
----
+Use roles and permissions in Launchpad to control who can access and manage KODE OS modules and data. Administrators can view existing roles, add new ones, and assign the right permissions for each user.
+
+<Info>
+  Launchpad uses **Role-Based Access Control (RBAC)** to manage user access.\
+  Instead of assigning individual permissions to each user, permissions are grouped under _roles_, and users inherit access based on their assigned role.
+</Info>
+
+### Why user roles matter
+
+Roles keep the workspace secure and organized. They determine who can manage buildings, dashboards, or automations, and who can simply view them.\
+Using **Role-Based Access Control (RBAC)**, permissions are granted to a role, and users inherit those permissions when the role is assigned to them. 
+
+**Prerequisites**
+
+- You must have an **Admin** or **Super Admin** role.
+- At least one **user** and **building** must exist.
+- If your organization uses **SSO**, ensure IdP role attributes are configured.
+
+<Accordion title="View existing roles">
+  1. In **Launchpad**, click **Apps \>\> KODE OS**.
+  2. Select the **Roles**. The **Roles list** appears, showing each role, description, and permission count.
+  3. Click a role to view its details.
+</Accordion>
+
+<Accordion title="Add a new role">
+  1. In the **Roles list**, click **\+ Add Role**.
+  2. Enter a Role**Name**  and **Description**.
+  3. Under **Permissions**, select modules and submodules to include.
+  4. Choose **Read** or **Write** access for each.
+  5. Click **Save**.
+</Accordion>
+
+<Accordion title="Edit a role">
+  1. In the **Roles list**, select the role to modify.
+  2. Click **Edit**.
+  3. Update role details or adjust permission checkboxes.
+  4. Click **Save**.
+
+  <Info>
+    ⚠️ A warning icon may appear beside dependent modules; hover to view the relationships.
+  </Info>
+</Accordion>
+
+<Accordion title="Copy from an existing role">
+  1. In the **Roles list**, click **\+ Add Role**.
+     1. Click **Copy From Another Role**.
+     2. Choose a source role and click **Save**.
+     3. Edit any fields or permissions as needed.
+     4. Click **Save** again.
+</Accordion>
+
+<Accordion title="Delete a role " description="You cannot delete a role if users are still assigned to it.">
+  1. In the **Roles list**, select the role to remove.
+     1. Click **Delete**.
+     2. Click **Yes, Delete**.
+</Accordion>
+
+### Understanding role mapping (for SSO Integration)
+
+When Single Sign-On (SSO) is enabled for your KODE OS workspace, external Identity Provider (IdP) roles can be mapped directly to KODE OS roles. This process centralizes user role management within your organization's IdP, simplifying administration.
+
+This means that while user authentication occurs in the IdP, their permissions within KODE OS are automatically passed through based on their IdP roles. This capability reinforces the concept that role assignments and modifications are managed in a single, authoritative source. 
+
+<Accordion title="Map user roles">
+  1. In **Launchpad**, click **Sign-in Methods**.
+  2. Select the authentication method.
+  3. Open the **Role Mapping** tab.
+  4. Click **\+ Assign Role(s)**.
+  5. Enter the following details.
+
+     **a. Role Name/IdP Role Identifier**   : Name or UID (by which it is uniquely identified in IdP) of the IdP group that you  want to map.
+
+        b. KODE Labs organization **Role**:
+
+            Launchpad Role (required)
+
+            Choose myMSI and KODE OS roles (optional)
+  6. Click **Assign Role(s)**.
+</Accordion>
+
+### How permissions are structured
+
+**Permissions** define _what_ a user can do within a module or submodule of KODE OS.\
+Each permission is tied to a role — roles grant users their effective access.
+
+**Types of permissions**
+
+- **Read Permissions**: Enables users to view information or access specific features within a module or submodule.
+- **Write Permissions**: Grants users the ability to modify, create, or delete data and configurations within a module or submodule.
+
+Permissions are grouped into **modules** (like _Buildings_, _Maintenance_, _Users_) and **submodules** (like _Users → General_ or _Buildings → Points_).\
+This structure allows administrators to give granular, precise access.
+
+**Prerequisites**
+
+- Have **Admin** or **Super Admin** permissions in Launchpad.
+- Have already created a **role** in Launchpad.
+- Know what level of access that role should have for user management.
+
+<Accordion title="Assign permissions to a role">
+  1. In **Launchpad**, go to **Apps → KODE OS → Roles**.
+  2. Select the role to modify.
+  3. Click **Edit**.
+  4. In **Permissions**, expand a module (for example, _Maintenance_ or _Buildings_).
+  5. Select **Read** or **Write** checkboxes as needed.
+  6. Click **Save**.
+
+  <Note>
+    Assign only the minimum permissions needed to keep your access model secure and auditable.
+  </Note>
+</Accordion>
+
+<Accordion title="Fine-tune permissions with constraints" description="Once you’ve assigned base permissions, you can limit how those permissions behave for specific user roles.">
+  1. In the same **Permissions** section, scroll to **Users \>\> General**.
+  2. Next to **Get Users**, click **Constraints**.
+     - In the pop-up, select **Assigned in Same Building** to restrict access to buildings the user manages.
+  3. For **Create Users** and **Delete Users**, click **Manage Constraints**.
+     - Under **Choose Roles**, select which user types this role can create or delete.
+  4. Click **Confirm**, then **Save**.
+</Accordion>
+
+<Accordion title="Configure Permissions for Users in KODE OS">
+   1. In **Launchpad**, click **Apps**.
+   2. Click **KODE OS**.
+   3. Open the **Roles**.
+   4. Select the role  to modify, then click **Edit**.
+   5. In  **Permissions**, go to **Users \>\> General**.
+   6. Select  the read and write permissions you want to enable:
+      - **Get Users** — view existing users.
+      - **Create Users** — add new users.
+      - **Delete Users** — remove users from KODE OS.
+
+      After selecting the permissions, you can fine-tune them by applying constraints.
+   7. Next to **Get Users**, click **Constraints**. 
+   8.  Select **AssignedInSameBuilding**. This limits the role to managing users only within the buildings they’re assigned to.
+   9.  Click **Confirm**.
+  10. Next to **Create Users**, click **Manage Constraints**.
+  11. In the **AllowedRoles** dropdown, select which user types this role can add. For example, allow the User Admin role to add only Technicians or Managers.
+  12. Click **Confirm**.
+  13. Next to **Delete Users**, click **Manage Constraints**.
+  14. In the **AllowedRoles** dropdown, select which user types this role can delete.
+  15. Click **Confirm**.
+  16. Click **Save**. The changes to user management for the selected role are saved.
+</Accordion>
