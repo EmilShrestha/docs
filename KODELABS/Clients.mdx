@@ -46,15 +46,15 @@ Before adding a building, make sure you:
   2. Click **\+ Add Building**.
   3. In **General Information**, enter the required details for your new building. Fields marked with an asterisk (\*) are mandatory.
 
-       <Tooltip tip="">3.1. Enter the </Tooltip>**Name**<Tooltip tip="">of the building as you want it to appear in Launchpad.</Tooltip> 
+       <Tooltip tip="">3.1. Enter the </Tooltip>**Name**<Tooltip tip="">of the building as you want it to appear in Launchpad.</Tooltip>
 
-       <Tooltip tip="">3.2. Enter the </Tooltip>**Year**<Tooltip tip="">the building was completed.</Tooltip> 
+       <Tooltip tip="">3.2. Enter the </Tooltip>**Year**<Tooltip tip="">the building was completed.</Tooltip>
 
        <Tooltip tip="">3.3. Enter an </Tooltip>**Area**<Tooltip tip="">in </Tooltip> _ft²_<Tooltip tip="">. Total floor area of the building.</Tooltip>
 
-       <Tooltip tip="">3.4. Select the </Tooltip>**Type **<Tooltip tip="">from the dropdown. </Tooltip>
+       <Tooltip tip="">3.4. Select the </Tooltip>\*\*Type \*\*<Tooltip tip="">from the dropdown. </Tooltip>
 
-       <Tooltip tip="">3.5. Enter the </Tooltip>**# of Floors **<Tooltip tip="">in the building.</Tooltip> 
+       <Tooltip tip="">3.5. Enter the </Tooltip>\*\*# of Floors \*\*<Tooltip tip="">in the building.</Tooltip> 
 
        3.6. Select the **Country Code** from the drop-down.
 
@@ -137,7 +137,7 @@ Use roles and permissions in Launchpad to control who can access and manage KODE
 
 Roles keep the workspace secure and organized. They determine who can manage buildings, dashboards, or automations, and who can simply view them.\
 Launchpad uses **Role-Based Access Control (RBAC)** to manage user access.\
-Instead of assigning individual permissions to each user, permissions are grouped under _roles_, and users inherit access based on their assigned role. 
+Instead of assigning individual permissions to each user, permissions are grouped under _roles_, and users inherit access based on their assigned role.
 
 **Prerequisites**
 
@@ -427,6 +427,25 @@ This is useful when your organization manages multiple identity providers or nee
   **Note:** Only users with **Admin** permissions can add or modify IAM methods.
 </Accordion>
 
+<Accordion title="Add a custom IAM method">
+  1. In **Launchpad**, open the **Sign-in Methods** page.
+  2. Click **\+ Add Sign-in Method**, then select **Custom Method**.
+  3. Copy the **Authentication Callback URL** from Launchpad and paste it into your SSO provider’s configuration page.
+  4. In your provider platform, generate the following information:
+     - **OpenID Well-Known URL**
+     - **Client ID**
+     - **Client Secret**
+  5. Return to Launchpad and enter these values in the corresponding fields.
+  6. (Optional) To make this method the default, select **Set as Default Sign-In Method**.
+  7. Click **Save**.
+
+  **Tip:** When new users are added, they’re assigned to the **default IAM method** by default.\
+  You can change the method manually during user creation by selecting **Change Method**.
+</Accordion>
+
+Your organization now supports multiple IAM sign-in methods.\
+You can manage or set the default sign-in method anytime under **Sign-in Methods** in Launchpad.
+
 ### Reference: Supported parameters
 
 **SAML Required Fields**
@@ -444,3 +463,85 @@ This is useful when your organization manages multiple identity providers or nee
 | **OpenID Well-Known URL** | URL           | Authentication endpoint for your directory instance.   |
 | **Client ID**             | Hex string    | Public identifier of your app.                         |
 | **Client Secret**         | 256-bit value | Secret used to authorize between KODE OS and your IdP. |
+
+## **Service Account Setup**
+
+**Service Account** in Launchpad allows secure, automated communication between KODE OS and external systems or integrations.\
+These accounts are designed for system-to-system authentication — not for individual users — and are commonly used for API access, automation, and integration with third-party platforms.
+
+Each service account includes:
+
+- A **credential type** (Private Key JWT or Client Secret)
+- **Access scopes** and **permissions** for specific resources
+- **Keys** with configurable lifecycles and expiration alerts
+
+**Before you begin**
+
+- **Admin or Super Admin** privileges in Launchpad.
+- Access to **Client Management** in your workspace.
+- (Optional) A list of sites where this service account will operate.
+
+### Accessing the Service Account
+
+To begin creating a Service Account, navigate to its management area in Launchpad, where administrators can view all existing service accounts, create new ones, and manage keys, permissions, and access scopes.
+
+<Tip>
+  Before creating a Service Account or generating keys, review how Launchpad manages its lifecycle.\
+  This helps prevent accidental loss of credentials or access disruptions.
+
+  **Key lifecycle**
+
+  - **Disable **a key to revoke its access temporarily.
+  - **Re-enable** a disabled key if needed.
+  - **Delete **a disabled key to remove it permanently.
+
+  **Service Account lifecycle**
+
+  - Disable the account to suspend all associated keys.
+  - Delete the account only after it’s disabled.
+</Tip>
+
+<Warning>
+  Once deleted, neither a Service Account nor its keys can be recovered.
+</Warning>
+
+1. Log in to **Launchpad**.
+2. From the sidebar, go to **Client Management \>\> Service Accounts**.
+
+<Accordion title="Create a New Service Account">
+  1. Click **\+ Add Service**.
+  2. Enter a **Name**  for the new account.
+  3. Select a **Credential Type**:
+     - **Private Key JWT** is recommended. It uses asymmetric cryptography for secure, automated authentication. It prevents transmitting shared secrets and is preferred for production-grade integrations.
+     - **Client Secret**. It is a shared secret-based method for simpler integrations. 
+  4. Enter **Description**.
+  5. In **Sites**,  either:
+     - **Select All Sites**, or
+     - Specific**Sites**  from the drop-down.
+  6. Click **Save**.
+</Accordion>
+
+After creating a service account, you’re redirected to the **Service Account Details** page. From here, you can create and manage keys.
+
+<Accordion title="Create a Key">
+  <Warning>
+    The **Private Key** is displayed only once. KODE Labs does **not** store it.\
+    Copy and store it in a secure location before closing the dialog.
+  </Warning>
+  1. Click **Generate Private Key**.
+  2. Choose one of the following:
+     - Select**Generate  new key** , or
+     - Paste your own key in JSON format.
+  3. Click **Copy** to retrieve the key. You must store the key in a secure location.
+  4. Click **Save**.
+</Accordion>
+
+<Accordion title="Manage Keys and Expiration" description="Each service account can have multiple keys with independent expiration and notification settings.">
+  1. In the **Keys** list, click the ( **⋮ **) icon. 
+  2. Select **Edit** to update expiration or notification settings.
+  3. Set a **Key Expiration Date** to define the key’s validity period.
+  4. In **Notify Users**, select the user(s) from the drop-down to  notify before the key expires.
+  5. Click **Save**.
+</Accordion>
+
+### Configure Service Account permissions
