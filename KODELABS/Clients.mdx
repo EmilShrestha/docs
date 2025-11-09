@@ -1383,6 +1383,130 @@ You can manage or set the default sign-in method anytime under **Sign-in Methods
 | **Client ID**             | Hex string    | Public identifier of your app.                         |
 | **Client Secret**         | 256-bit value | Secret used to authorize between KODE OS and your IdP. |
 
+## Authentication & Security
+
+**Authentication & Security **lets administrators manage organization-wide sign-in and session policies.\
+It is available under **Security Settings \>\> Authentication & Security** and includes three key tabs:\
+**Multifactor Authentication (MFA)**, **Password**, and **Timeout Settings**.
+
+These settings strengthen access control across KODE OS and Launchpad by enforcing secure authentication, password policies, and session limits.
+
+### **Multifactor Authentication (MFA)**
+
+MFA adds a verification step beyond username and password.\
+When a user signs in from a new device or application, they are prompted to verify their identity using a second factor, such as a unique code from an authenticator app or a text message.\
+This reduces the risk of unauthorized account access.
+
+**How MFA Works**
+
+On first sign-in from a new device:
+
+1. The user enters their username and password.
+2. They are prompted to enter a second authentication factor. For example, a one-time code from their authenticator app or received via SMS.
+3. Once verified, the device is recognized for subsequent logins based on the configured MFA frequency.
+
+Enabling MFA adds an essential layer of protection against credential compromise.
+
+**Customize MFA Settings**
+
+You can configure MFA behavior from **Security Settings \>\> Authentication & Security \>\> MFA**.
+
+<img
+  src=""
+  alt="Screenshot to be uploaded"
+  title="Screenshot 2025-11-09 at 14.18.16.png"
+  style={{ width:"71%" }}
+/>
+
+- **Enforcement:** Choose whether to enforce MFA for all users or allow individual users to enable it themselves.
+
+  <Note>
+    SSO-authenticated users are excluded from this enforcement.
+  </Note>
+- **Frequency:** Define how often MFA prompts appear, at every login.
+
+<Accordion title="FAQs">
+  
+</Accordion>
+
+### Password Settings
+
+Password policies define how users create and maintain secure credentials.\
+Strong password requirements reduce the likelihood of unauthorized access and credential reuse.\
+All configurations are available under **Security Settings \>\> Authentication & Security \>\> Password**.
+
+<img
+  src="/images/Screenshot2025-11-09at15.03.59.png"
+  alt="Screenshot to be uploaded"
+  title="Screenshot 2025-11-09 at 15.03.59.png"
+  style={{ width:"62%" }}
+/>
+
+**Password Complexity**
+
+You can enforce predefined or custom password complexity rules.
+
+- **Medium:** Minimum 8 characters; includes at least one digit, one uppercase letter, and one special character.
+- **High:** Maximum 12-64 characters; includes at least one digit, one uppercase letter, one special character, and no consecutive characters.
+
+**Customize Password Complexity:**\
+You can define whether passwords must include:
+
+- Uppercase letters (A through Z).
+- Base 10 digits (0 through 9).
+- Non-alphanumeric characters (special characters).
+- Non-consecutive characters.
+
+**Lockout Settings**
+
+T-o temporarily restrict access to a user account after a specified number of unsuccessful sign in attempts:
+
+- **Retries before lockout:** Set how many failed attempts trigger a lockout. For example, allow five unsuccessful sign in attempts before the account enters a locked state.
+- **Lockout time:** Define how long accounts remain locked before users can retry. For example, set the lockout time to one hour to temporarily restrict access while allowing users to regain entry after the specified duration.
+
+**Password Configurations**
+
+- **Password history:** Keeps a record of previously used passwords to prevent reuse and reduce the risk of compromised accounts.
+- **Password expiry time:** Defines when users must update their passwords after a set period.
+
+<Accordion title="FAQs">
+  **Can administrators create custom password policies?**\
+  Yes. Administrators can define custom password rules, including minimum length, required character types, and non-consecutive character enforcement.
+
+  **How does password expiration work?**\
+  When a password reaches its configured expiration period, users are prompted to change it upon their next login.
+
+  **Does the system check for leaked passwords?**\
+  Yes. The system checks passwords against known breached databases and prevents users from using compromised passwords.
+</Accordion>
+
+### Timeout Settings
+
+Timeout policies automatically sign out inactive users to protect sensitive data. \
+Configure them under **Security Settings → Authentication & Security → Timeout**.
+
+<Tip>
+  The timeouts can be configured in **days** or **hours**, depending on organizational needs.
+</Tip>
+
+<img
+  src="/images/Screenshot2025-11-09at14.44.09.png"
+  alt="Screenshot to be added"
+  title="Screenshot 2025-11-09 at 14.44.09.png"
+  style={{ width:"67%" }}
+/>
+
+- **Session Timeout:** Sets the total duration a signed-in session remains active. After this time elapses without any user activity, the user is logged out.
+- **Idle Timeout:** Defines the period of inactivity before automatic sign-out during an active session.
+
+<Accordion title="Session Timeout Settings FAQs">
+  **How are timeouts configured?**\
+  Session and idle timeouts can be set in days or hours. After the configured period of inactivity, users are automatically signed out.
+
+  **What values are supported for timeouts?**\
+  Timeout values must be positive, whole numbers. Non-integer or negative inputs are not accepted.
+</Accordion>
+
 ## **Service Account Setup**
 
 Service Account in Launchpad allows secure, automated communication between KODE OS and external systems or integrations.\
