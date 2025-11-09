@@ -3,7 +3,7 @@ title: "Clients"
 description: "Clients are organizations that are managed under a Channel Partner in Launchpad. A client is the secure space where you add buildings, invite users, and control how those users sign in and what they can do. Use this page to understand how client workspaces are structured and to complete the first setup tasks. "
 ---
 
-### **How Clients fit in Launchpad**
+### **How Clients Fit in Launchpad**
 
 Each **Client** is a customer of the **Channel Partner**, an organisation or tenant with its own workspace.
 
@@ -17,7 +17,7 @@ Inside each **Client**, you manage:
 - **Service Accounts**: Automate integrations or API connections.
 
 <img
-  src="/HowClientsfitinLaunchpad"
+  src="/ChatGPTImageNov7,2025,08_52_07PM.png"
   alt="How Clientsfitin Launchpa"
   title="How Clientsfitin Launchpa"
   style={{ width:"62%" }}
@@ -41,7 +41,7 @@ Before adding a building, make sure you:
 - Hold the **Admin** or **Manager** role for that client.
 - Know your building’s name and location.
 
-<Accordion title="Add a building">
+<Accordion title="Add a First Building">
   1. In **Launchpad**, select **Buildings**. The **Buildings list** opens, showing all published and unpublished buildings with their address, time zone, and enabled products.
   2. Click **\+ Add Building**.
   3. In **General Information**, enter the required details for your new building. Fields marked with an asterisk (\*) are mandatory.
@@ -79,18 +79,78 @@ Before adding a building, make sure you:
   5.  Click **Save**.
 
      <img
-       src="/AddingabuildinginLaunchpad"
+       src="/k1.png"
        alt="Addingabuildingin Launchpa"
        title="Addingabuildingin Launchpa"
        style={{ width:"63%" }}
      />
 
-     The new building is automatically set to _Unpublished_ status. By default, only **Super Admins** can view unpublished buildings. 
+     The new building is automatically set to _Unpublished_ status. By default, only **Super Admins** can view unpublished buildings.
 
      You have successfully added a new building to your KODE OS portfolio. The building is now listed in Launchpad, ready for further configuration.
 </Accordion>
 
-## **Assign a user to a building in Cloud BMS**
+## Manage Buildings
+
+Launchpad enables you to add, edit, publish, and manage all buildings in your KODE OS portfolio.\
+Each building represents a physical site or asset and serves as the foundation for user access, automation, and data management.
+
+<Accordion title="Add a New Building">
+  Add new buildings to your existing portfolio at any time. Each building you create becomes part of your organization’s managed sites in Launchpad, allowing you to configure details, assign users, and enable products as needed.
+
+  <Warning>
+    Newly created buildings are automatically set to **Unpublished**.\
+    Only users with **Super Admin** roles can view unpublished buildings.
+  </Warning>
+  1. In **Launchpad**, select **Buildings** from the sidebar.
+  2. Click **\+ Add Building**.
+  3. In **General Information**, enter the required details for your new building. Fields marked with an asterisk (\*) are mandatory.
+  4. Click **Save.**
+</Accordion>
+
+<Accordion title="Edit Building Details">
+  1. In the sidebar, click **Buildings**.
+  2. Select the building  to edit.
+  3. Click **Edit**.
+  4. Modify the required fields.
+  5. Click **Save**. 
+
+     The changes are applied instantly and reflected across KODE OS, myMSI, and Launchpad.
+</Accordion>
+
+<Accordion title="Publish a Building">
+  Publishing a building makes it visible and accessible to all authorized users within your organization.
+
+  1. In the sidebar, click **Buildings**.
+  2. Select an **Unpublished** building from the list.
+  3. Click **Publish**.\
+     A confirmation pop-up appears.
+  4. Click **Yes, Publish**.
+
+  The building’s status changes to **Published**, and its associated data becomes available across all KODE OS applications.
+</Accordion>
+
+<Accordion title="Search for Buildings">
+  Quickly locate any building in your portfolio using the search feature.
+
+  1. In **Launchpad**, click **Buildings**.
+  2. Search  a building  by entering the building name.
+  3. Click the building to open its details page.
+</Accordion>
+
+<Accordion title="Assign a Building to a User">
+  Assigning users to buildings defines who has access to specific sites within your organization.
+
+  1. In **Portfolio View**, select **Settings \>\> Buildings**.\
+     The buildings list appears.
+  2. Select a building to open its details page.
+  3. Click  **Users**  to view assigned users.
+  4. Click **\+ Assign Users**.
+  5. Select one or more users from the list.
+  6. Click **Save**.
+</Accordion>
+
+## **Assign a User to a building in Cloud BMS**
 
 Each user in KODE OS must be assigned to a building to access its dashboards, automation rules, and data. Assign users to specific buildings to control who can access building data and features in Cloud BMS.\
 This task is for administrators who manage access within KODE OS.
@@ -119,7 +179,7 @@ This task is for administrators who manage access within KODE OS.
   11. Click **Save**.
 
   <img
-    src="/Selectauser"
+    src="/k2.png"
     alt="Selectause"
     title="Selectause"
     style={{ width:"82%" }}
@@ -129,7 +189,137 @@ This task is for administrators who manage access within KODE OS.
   An email notification is automatically sent to confirm their new access.
 </Accordion>
 
-## Control access with roles and permissions
+## Manage Users (Clients)
+
+Users display all existing accounts in your organization, including active, pending, and invited users.
+
+When adding or inviting users, assign an appropriate Launchpad role to define their access level.
+
+- **Admin Access** provides the highest level of control, allowing:
+
+  Launchpad Access:	Full access to all Launchpad features, allowing seamless navigation across modules.
+
+  Client Management: View and edit client details to maintain accurate, up-to-date information.
+
+  User Management: View, add, and modify user profiles within the organization.
+
+  SSO Configuration:	Access and configure Single Sign-On (SSO) settings for secure authentication.
+- **Restricted Access** provides no Launchpad access but allows channel partners to centrally add
+- and manage users without exposing the full interface.
+
+<AccordionGroup>
+  <Accordion title="Add or Invite a User">
+    Add new users to your organization or invite users from trusted external organizations.
+
+    <Warning>
+      You can only invite users who already have accounts under one of your **Trusted Organizations**.
+    </Warning>
+    1. In **Launchpad**, click **Users**.
+    2. Click **\+ New User**.
+    3. Choose one of the following:
+       - **Add User**: Create a new user within your organization (temporary or permanent).
+       - **Invite User**: Invite a user from a trusted organization to collaborate (temporary or permanent).
+  </Accordion>
+  <Accordion title="Add a User">
+    Adding a user  requires admin privileges in Launchpad.
+
+    3. In **General Information**, enter the required details of the user. Fields marked with an asterisk (\*) are mandatory.
+    2. In **Assign Apps**, select the app(s) to assign and their respective roles.\
+       For **KODE OS**, also assign the applicable **Sites**.
+    3. Click **Save User**.
+  </Accordion>
+  <Accordion title="Invite a user">
+    3. In **General Information**, enter the required details of the user. Fields marked with an asterisk (\*) are mandatory.
+    2. In **Assign Apps**, choose the app(s) and roles to assign.
+    3. Click **Invite User**.
+  </Accordion>
+</AccordionGroup>
+
+<Accordion title="Bulk Import Users">
+  Import multiple users at once using a `.xlsx` file. All listed users are automatically added to your organization.
+
+  1. In **Launchpad**, click **Users**.
+  2. Click the ( \*\*⋮ \*\*) icon on the **Users**.
+  3. Select **Bulk Import from .xlsx**.
+  4. Click **Download Template** to download the .xlst file.
+  5. Browse and open the template file.
+  6. In the file, fill out: First Name, Last Name, Email, Status, Position, Phone Number, Role, and Apps.
+  7. Save the file.
+  8. Attach or drag the file into **\+ Attach or Drag to Upload**.
+  9. Click **Import**.
+</Accordion>
+
+<Accordion title="Filter the Users List">
+  1. In **Launchpad**, click **Users**.
+  2. Click **Filters**.
+  3. Select filter criteria:
+     - Status (Active, Inactive, Pending, Locked)
+     - MFA Status (Active, Inactive)
+     - Account Type (Guest, Internal)
+     - Launchpad Role (Admin, Restricted Access)
+     - Sign-in Method
+  4. Click **Apply**. The list updates according to the selected filters.
+  5. 
+  6. 
+</Accordion>
+
+<Accordion title="Edit a User Account">
+   1. Click the user’s **Name**.
+   2. Click  **Edit.**
+   3. Update the necessary fields.
+   4. Click **Save**.
+   5. 
+   6. 
+   7. 
+   8. 
+   9. 
+  10. 
+  11. The information is updated instantly.
+</Accordion>
+
+<Accordion title="Delete or Deactivate a User Account">
+  1. Click the user’s **Name**.
+  2. Click the ( \*\*⋮ \*\*) icon.
+  3. Choose one of the following:
+     - **Delete**: permanently removes the user.
+     - **Deactivate**: disables the account but retains user data.
+</Accordion>
+
+<Accordion title="Assign a User to KODE OS">
+  Assign users to KODE OS during account creation or after they’ve been added to Launchpad to grant them access and define their role within the application.
+
+  1. In **Launchpad**, click **Users**.
+  2. Select the user to assign.
+  3. Next to **KODE OS**, click **Assign App**.
+  4. In the dialog, select the appropriate **User Role**.
+  5. Click **Assign**.
+
+  The user is assigned to **KODE OS** and receives a confirmation email.
+</Accordion>
+
+**myMSI User Roles**
+
+When assigning users to **myMSI**, select the appropriate role based on the user’s responsibilities and required access level.
+
+Available roles for Clients:
+
+- Client Admin: Can view and edit all project details across myMSI.
+- Site Manager: Can view and edit details under Projects, Sites, and Admin Panel only for the projects they are assigned to.
+- MSI Admin and MSI Project Manager: Can assign users to projects and manage project-level access.
+
+<Accordion title="Assign a User to myMSI">
+  Assign users to myMSI during account creation or after they’ve been added to Launchpad to grant them access and define their role within the application.
+
+  1. In **Launchpad**, click **Users**.
+  2. Select the user to assign.
+  3. Next to **myMSI**, click **Assign App**.
+  4. In the dialog, select the **User Role**.
+  5. Click **Assign**.
+
+  The user is assigned to **myMSI** and receives an email notification.
+</Accordion>
+
+## Control Access with Roles and Permissions
 
 Use roles and permissions in Launchpad to control who can access and manage KODE OS modules and data. Administrators can view existing roles, add new ones, and assign the right permissions for each user.
 
@@ -466,14 +656,14 @@ You can manage or set the default sign-in method anytime under **Sign-in Methods
 
 ## **Service Account Setup**
 
-**Service Account** in Launchpad allows secure, automated communication between KODE OS and external systems or integrations.\
+Service Account in Launchpad allows secure, automated communication between KODE OS and external systems or integrations.\
 These accounts are designed for system-to-system authentication — not for individual users — and are commonly used for API access, automation, and integration with third-party platforms.
 
 Each service account includes:
 
-- A **credential type** (Private Key JWT or Client Secret)
-- **Access scopes** and **permissions** for specific resources
-- **Keys** with configurable lifecycles and expiration alerts
+- A **credential type,** such as Private Key JWT or Client Secret.
+- **Access scopes** and **permissions** for specific resources.
+- **Keys** with configurable lifecycles and expiration alerts.
 
 **Before you begin**
 
@@ -491,9 +681,9 @@ To begin creating a Service Account, navigate to its management area in Launchpa
 
   **Key lifecycle**
 
-  - **Disable **a key to revoke its access temporarily.
-  - **Re-enable** a disabled key if needed.
-  - **Delete **a disabled key to remove it permanently.
+  - Disable a key to revoke its access temporarily.
+  - Re-enable a disabled key if needed.
+  - Delete a disabled key to remove it permanently.
 
   **Service Account lifecycle**
 
@@ -537,11 +727,91 @@ After creating a service account, you’re redirected to the **Service Account D
 </Accordion>
 
 <Accordion title="Manage Keys and Expiration" description="Each service account can have multiple keys with independent expiration and notification settings.">
-  1. In the **Keys** list, click the ( **⋮ **) icon. 
+  1. In the **Keys** list, click the ( \*\*⋮ \*\*) icon. 
   2. Select **Edit** to update expiration or notification settings.
   3. Set a **Key Expiration Date** to define the key’s validity period.
   4. In **Notify Users**, select the user(s) from the drop-down to  notify before the key expires.
   5. Click **Save**.
 </Accordion>
 
-### Configure Service Account permissions
+### Service Account Permissions
+
+You can customize the permissions for each Service Account to control access levels, define integration scopes, and maintain visibility into all system activities.\
+By default, new service accounts have no permissions enabled.
+
+**Permission Scopes and Access Levels**
+
+Permissions are assigned through access levels, which determine what each account can read, write, or create within KODE OS.\
+Common permission scopes include:
+
+- **Read Buildings**. It is required for all other permissions to function.
+- **Read Devices**, **Add Devices**
+- **Read Building Areas**
+- **Read / Add / Write Points**
+- **Read / Create Timeseries**
+
+Each permission can be enabled independently, allowing developers to fine-tune integrations with just the right level of access.
+
+<Accordion title="Manage Permissions for a Service Account">
+  1. Go to ****Service Accounts,  select a service account and clickPermissions**** .
+  2. Click **Edit**.
+  3. Select the \*\*Read \*\*or \*\*Write \*\*permissions for each group. For example, PointsPublic, TimeseriesPublic, and DevicesPublic.
+
+     <Tip>
+       Color indicators show which permissions are active in each section.
+
+       🟢 **Green:** Read enabled\
+       🟠 **Orange:** Write enabled
+     </Tip>
+  4. Click **Save**.
+</Accordion>
+
+<Accordion title="Manage Site Access for a Service Account">
+  You can view and modify which sites a service account can access.
+
+  1. In **KODE OS**, click **Settings** \>\> **Users**.
+  2. Search for the service account by name.
+  3. Click **Buildings.**
+  4. Review the assigned sites.
+  5. To add more sites:
+     - Click **\+ Assign Buildings**.
+     - Select additional sites.
+     - Click **Save**.
+</Accordion>
+
+Service Accounts in Launchpad provide a secure, structured way to manage integrations and control access through keys and permissions. Proper setup and key rotation help ensure safe and efficient API operations.
+
+## Manage Trusted Organizations
+
+Trusted Organizations represent organizations that have established trust settings with your organization.
+
+Manage them from **Security Settings \>\> Trusted Organizations**, which includes two tabs:
+
+- **Outbound**
+
+  List of the organizations that can invite your users as a channel.
+
+  **Displayed columns:**
+  - **Organization Name**
+  - **Organization Domain**
+  - **MFA Setup**: Inherited or Enforced
+
+  If you are a **Channel Partner**, this list includes all your client organizations. Each listed organization has trust settings established with your organization.
+- **Inbound**
+
+  The KODE Labs Admin organization from which KODE Labs has created your organization.
+
+  **Displayed columns:**
+  - **Organization Name**
+  - **Organization Domain**
+  - **MFA Setup**
+  - **Actions**: View and Update
+
+### Update MFA setup
+
+You can update the MFA setup for an organization by clicking on the Pencil icon at the far right of the organization row.
+
+The Update MFA Setup field in the Inbound tab provides options to select between Inherited and Enforced.
+
+- **Inherited**: Guest users from that organization inherit MFA settings from their main organization.
+- **Enforced**: Guest users from that organization must follow your organization’s MFA settings.
