@@ -1426,7 +1426,32 @@ You can configure MFA behavior from **Security Settings \>\> Authentication & Se
 - **Frequency:** Define how often MFA prompts appear, at every login.
 
 <Accordion title="FAQs">
-  
+  **Is MFA required for users logging in with email and password?**\
+  Yes, when configured, only users signing in with email and password (not SSO) are required to complete MFA setup and verification.
+
+  **How does MFA handle device recognition?**\
+  The system uses device fingerprinting to identify trusted devices. MFA prompts reappear if users change browsers, clear cookies, or sign in from a new device, regardless of the selected seven-day or thirty-day frequency.
+
+  **Are users prompted to set up MFA after new requirements are added?**\
+  Yes, existing users are asked to configure MFA during their next login once the requirement is enforced.
+
+  **Can users configure MFA for their own accounts?**\
+  Yes, users can set up MFA individually from their account settings. These configurations are validated during login.
+
+  **What happens when an admin configures MFA for the organization?**\
+  Organization-level MFA policies override user settings. If previously selected options are removed, users default to the minimum available enforcement level.
+
+  **How does MFA interact with session timeout?**\
+  If the MFA remember time expires before the session timeout, users are prompted for MFA verification sooner. If it matches or exceeds the session timeout, verification occurs when the session expires.
+
+  **Can admins reset MFA for a user?**\
+  Yes, admins can reset MFA for a user, requiring them to complete setup again during the next login.
+
+  **Can admins disable MFA for a user?**\
+  Yes, admins can disable MFA for a user. New users can sign in without MFA, while existing users remain subject to 2FA until removed from enforcement.
+
+  **Does MFA work across different devices and browsers?**\
+  Yes, MFA functions consistently across supported browsers and mobile devices.
 </Accordion>
 
 ### Password Settings
